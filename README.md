@@ -5,5 +5,7 @@ st
   requires zsh
 
 tmux
-  rename tmux.conf to .tmux.conf and move to home folder
   requires xclip
+
+zsh
+  requires oh my szh plugin manager
