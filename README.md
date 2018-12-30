@@ -9,3 +9,6 @@ tmux
 
 zsh
   requires oh my szh plugin manager
+
+X11
+  uses ~/Pictures/wallpaper.png as wallpaper
