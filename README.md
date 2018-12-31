@@ -20,3 +20,6 @@ i3
   requires tmux
   requires zsh
   uses ~/Pictures/wallpaper.png as lock image
+
+vim
+  incomplete config
