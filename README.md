@@ -13,6 +13,7 @@ zsh
 
 X11
   requires feh
+  requires compton
   uses ~/Pictures/wallpaper.png as wallpaper
 
 i3
