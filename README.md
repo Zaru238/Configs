@@ -1,8 +1,9 @@
 Arch linux config files
 
 st
-  requires Hack-Regular font
+  requires FantasqueSans font
   requires zsh
+  requires compton
 
 tmux
   requires xclip
