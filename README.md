@@ -25,5 +25,5 @@ i3
   requures dmenu
   requires xkb-layout-state
 
-vim
-  incomplete config
+nvim
+  run init.sh for nvim setup

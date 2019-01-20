@@ -1,4 +1,4 @@
-" Show relative line numbers
+" how relative line numbers
 set number
 set relativenumber
 
@@ -44,4 +44,3 @@ set ignorecase
 
 " Set syntax highlight
 syntax enable
-
