@@ -15,7 +15,7 @@ set autoindent
 
 " Show spaces, tabs and trail whitespace
 set list
-set listchars=space:·,tab:>-,trail:■
+set listchars=space:ˑ,tab:>-,trail:■
 
 " Allow switch buffers without saving or discarding changes
 set hidden
@@ -44,3 +44,12 @@ set ignorecase
 
 " Set syntax highlight
 syntax enable
+
+" disable mode show (lightline plugin shows mode now)
+set noshowmode
+
+" status settings
+set laststatus=2
+
+" lightline plugin configuration
+ let g:lightline = { 'colorscheme': 'solarized', }
