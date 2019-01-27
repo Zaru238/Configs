@@ -51,5 +51,12 @@ set noshowmode
 " status settings
 set laststatus=2
 
+" plugin istallation
+call plug#begin('~/.config/nvim/plugged')
+
+  Plug 'itchyny/lightline.vim'
+
+call plug#end()
+
 " lightline plugin configuration
  let g:lightline = { 'colorscheme': 'solarized', }
