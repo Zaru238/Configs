@@ -28,4 +28,3 @@ i3
 nvim
   requires ctags
   run init.sh for nvim setup
-  run :PlugInstall inside nvim for plugin installation

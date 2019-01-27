@@ -17,6 +17,6 @@ rm -rf vim-colors-solarized
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-#Manually run :PlugInstall for installing plugins
+nvim -c ":PlugInstall | qa"
 
 echo "Done"

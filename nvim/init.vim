@@ -74,6 +74,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'junegunn/fzf', { 'dir': '~/.config/nvim/fzf' }
   Plug 'vim-scripts/a.vim'
+  Plug 'tpope/vim-commentary'
 
 call plug#end()
 
