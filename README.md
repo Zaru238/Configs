@@ -26,4 +26,6 @@ i3
   requires xkb-layout-state
 
 nvim
+  requires ctags
   run init.sh for nvim setup
+  run :PlugInstall inside nvim for plugin installation
