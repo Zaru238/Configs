@@ -76,7 +76,7 @@ floating_modifier $mod
 bindcode $mod+$kc_return exec st -e tmux
 
 # start ranger
-bindcode $mod+$kc_r exec st -e tmux -c ranger
+bindcode $mod+$kc_r exec st -e tmux -c vifm
 
 # kill focused window
 bindcode $mod+Shift+$kc_q kill

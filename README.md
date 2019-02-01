@@ -19,7 +19,7 @@ X11
 i3
   requires i3blocks
   requires i3lock-fancy-multimonitor
-  requires ranger
+  requires vifm
   requires tmux
   requires zsh
   requures dmenu
