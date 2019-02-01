@@ -75,6 +75,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.config/nvim/fzf' }
   Plug 'vim-scripts/a.vim'
   Plug 'tpope/vim-commentary'
+  Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
+  Plug 'vifm/vifm.vim'
 
 call plug#end()
 

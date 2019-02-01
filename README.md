@@ -27,4 +27,5 @@ i3
 
 nvim
   requires ctags
+  requires vifm
   run init.sh for nvim setup
