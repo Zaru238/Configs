@@ -67,6 +67,9 @@ nnoremap <f5> :!ctags -R -h "h.hpp.c.cpp"<CR>
 " Substitute jump to first tag with jump that can handle several destination
 nnoremap <C-]> g<C-]>
 
+" Disable netrw file manager
+let loaded_netrwPlugin = 1
+
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
 
@@ -77,6 +80,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-commentary'
   Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
   Plug 'vifm/vifm.vim'
+  Plug 'pboettch/vim-cmake-syntax'
 
 call plug#end()
 
@@ -91,6 +95,8 @@ let g:cpp_class_decl_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 1
 
 " fzf plugin configuration
+let $FZF_DEFAULT_COMMAND = 'rg --files'
+
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -105,7 +111,11 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
 nnoremap <C-p> :FZF<CR>
 
 " a.vim plugin configuration
 nnoremap <C-a> :A<CR>
+
+" vifm plugin configuration
+nnoremap <C-m> :EditVifm<CR>

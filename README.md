@@ -28,4 +28,5 @@ i3
 nvim
   requires ctags
   requires vifm
+  reguires ripgrep
   run init.sh for nvim setup
