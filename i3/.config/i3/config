@@ -29,6 +29,7 @@ set $kc_c 54
 set $kc_d 40
 set $kc_e 26
 set $kc_f 41
+set $kc_m 58
 set $kc_p 33
 set $kc_q 24
 set $kc_r 27
@@ -75,8 +76,8 @@ floating_modifier $mod
 # start a terminal
 bindcode $mod+$kc_return exec st -e tmux
 
-# start ranger
-bindcode $mod+$kc_r exec st -e tmux -c vifm
+# start console file manager
+bindcode $mod+$kc_m exec st -e tmux -c nnn
 
 # kill focused window
 bindcode $mod+Shift+$kc_q kill

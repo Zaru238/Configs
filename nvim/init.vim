@@ -68,7 +68,7 @@ nnoremap <f5> :!ctags -R -h "h.hpp.c.cpp"<CR>
 nnoremap <C-]> g<C-]>
 
 " Disable netrw file manager
-let loaded_netrwPlugin = 1
+"let loaded_netrwPlugin = 1
 
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
@@ -79,13 +79,19 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-scripts/a.vim'
   Plug 'tpope/vim-commentary'
   Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
-  Plug 'vifm/vifm.vim'
   Plug 'pboettch/vim-cmake-syntax'
+  Plug 'mcchrish/nnn.vim'
 
 call plug#end()
 
 " lightline plugin configuration
-let g:lightline = { 'colorscheme': 'solarized', }
+let g:lightline =
+\ { 'colorscheme': 'solarized',
+  \ 'component_function': { 'filename': 'LightLineFilename' }, }
+
+function! LightLineFilename()
+  return expand('%')
+endfunction
 
 " vim-cpp-enhanced-highlight plugin configuration (though looks like these
 " options doesn't affect anything
@@ -116,6 +122,3 @@ nnoremap <C-p> :FZF<CR>
 
 " a.vim plugin configuration
 nnoremap <C-a> :A<CR>
-
-" vifm plugin configuration
-nnoremap <C-m> :EditVifm<CR>

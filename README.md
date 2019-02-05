@@ -19,7 +19,7 @@ X11
 i3
   requires i3blocks
   requires i3lock-fancy-multimonitor
-  requires vifm
+  requires nnn
   requires tmux
   requires zsh
   requures dmenu
@@ -27,6 +27,6 @@ i3
 
 nvim
   requires ctags
-  requires vifm
+  requires nnn
   reguires ripgrep
   run init.sh for nvim setup
