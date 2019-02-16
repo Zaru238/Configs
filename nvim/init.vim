@@ -122,3 +122,7 @@ nnoremap <C-p> :FZF<CR>
 
 " a.vim plugin configuration
 nnoremap <C-a> :A<CR>
+
+" nnn plugin configuration
+let g:nnn#set_default_mappings = 0
+nnoremap <C-m> :NnnPicker<CR>
