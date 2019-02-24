@@ -125,4 +125,4 @@ nnoremap <C-a> :A<CR>
 
 " nnn plugin configuration
 let g:nnn#set_default_mappings = 0
-nnoremap <C-m> :NnnPicker<CR>
+nnoremap <C-n> :NnnPicker<CR>
