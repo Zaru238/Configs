@@ -30,3 +30,10 @@ nvim
   requires nnn
   reguires ripgrep
   run init.sh for nvim setup
+
+weechat
+
+bitlbee-purple
+  resides in aur package
+  install purple-skypeweb for enabling skype
+  install telegram-purple for enabling telegram

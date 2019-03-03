@@ -1,0 +1,10 @@
+# Solarized colorscheme
+/set weechat.bar.status.color_bg 0
+/set weechat.bar.title.color_bg 0
+/set weechat.color.chat_nick_colors 1,2,3,4,5,6
+/set weechat.color.chat_highlight 7
+/set buflist.format.hotlist_message "${color:7}"
+/set buflist.format.buffer_current "${color:,7}${format_buffer}"
+
+# Enable connect to servers temporary via connect command
+/set irc.look.temporary_servers on
