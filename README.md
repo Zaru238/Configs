@@ -30,3 +30,4 @@ nvim
   requires nnn
   reguires ripgrep
   run init.sh for nvim setup
+  install python-neovim for enabling support for python
