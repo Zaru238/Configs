@@ -77,7 +77,7 @@ floating_modifier $mod
 bindcode $mod+$kc_return exec st -e tmux
 
 # start console file manager
-bindsym $mod+n exec st -e /bin/zsh -c 'tmux -c nnn'
+bindsym $mod+n exec st -e tmux new-session 'nnn'
 
 # kill focused window
 bindcode $mod+Shift+$kc_q kill

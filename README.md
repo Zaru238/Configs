@@ -31,3 +31,10 @@ nvim
   reguires ripgrep
   run init.sh for nvim setup
   install python-neovim for enabling support for python
+
+weechat
+
+bitlbee-purple
+  resides in aur package
+  install purple-skypeweb for enabling skype
+  install telegram-purple for enabling telegram
