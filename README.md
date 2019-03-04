@@ -29,8 +29,9 @@ nvim
   requires ctags
   requires nnn
   reguires ripgrep
+  requires python-neovim
+  requires python-pytest
   run init.sh for nvim setup
-  install python-neovim for enabling support for python
 
 weechat
 
