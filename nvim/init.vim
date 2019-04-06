@@ -67,8 +67,9 @@ nnoremap <f5> :!ctags -R -h "h.hpp.c.cpp"<CR>
 " Substitute jump to first tag with jump that can handle several destination
 nnoremap <C-]> g<C-]>
 
-" Disable netrw file manager
-"let loaded_netrwPlugin = 1
+" cnext cpevious hotkeys
+nnoremap gn :cnext<CR>
+nnoremap gp :cprevious<CR>
 
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
@@ -78,7 +79,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.config/nvim/fzf' }
   Plug 'vim-scripts/a.vim'
   Plug 'tpope/vim-commentary'
-  Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
+  Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
   Plug 'pboettch/vim-cmake-syntax'
   Plug 'mcchrish/nnn.vim'
 
@@ -124,5 +125,15 @@ nnoremap <C-p> :FZF<CR>
 nnoremap <C-a> :A<CR>
 
 " nnn plugin configuration
+function! GetCurrentBufferDirectory()
+  let l:curBufDir = expand('%:p')
+  if isdirectory(l:curBufDir) ==# 0
+    let l:curBufDir = expand('%:p:h')
+  endif
+  return l:curBufDir
+endfunction
+
 let g:nnn#set_default_mappings = 0
+let g:nnn#replace_netrw = 1
 nnoremap <C-n> :NnnPicker<CR>
+nnoremap <C-h> :call nnn#pick(GetCurrentBufferDirectory())<CR>
