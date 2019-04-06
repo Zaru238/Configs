@@ -135,5 +135,4 @@ endfunction
 
 let g:nnn#set_default_mappings = 0
 let g:nnn#replace_netrw = 1
-nnoremap <C-n> :NnnPicker<CR>
-nnoremap <C-h> :call nnn#pick(GetCurrentBufferDirectory())<CR>
+nnoremap <C-n> :call nnn#pick(GetCurrentBufferDirectory())<CR>
