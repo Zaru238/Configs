@@ -71,6 +71,15 @@ nnoremap <C-]> g<C-]>
 nnoremap gn :cnext<CR>
 nnoremap gp :cprevious<CR>
 
+" line hint for about exceeding 80 symbol line width
+set colorcolumn=81
+
+" Swap physical line move up/down with display line one's
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
 
