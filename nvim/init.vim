@@ -1,6 +1,7 @@
-" how relative line numbers
+" how relative line numbers and min number colomn width
 set number
 set relativenumber
+set numberwidth=4
 
 " Highlight searched word. Highlight is disabled by :noh ex
 set hlsearch
@@ -71,14 +72,24 @@ nnoremap <C-]> g<C-]>
 nnoremap gn :cnext<CR>
 nnoremap gp :cprevious<CR>
 
-" line hint for about exceeding 80 symbol line width
+" set width exceeding line hint
 set colorcolumn=81
+
+" disable width exceeding line hint for quickfix window
+augroup colorcolumn_qf
+    autocmd!
+    au FileType qf setlocal colorcolumn=
+augroup END
 
 " Swap physical line move up/down with display line one's
 nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
+
+" Words aren't divided on line break
+set wrap
+set linebreak
 
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
@@ -91,6 +102,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
   Plug 'pboettch/vim-cmake-syntax'
   Plug 'mcchrish/nnn.vim'
+  Plug 'rhysd/vim-clang-format'
 
 call plug#end()
 
@@ -145,3 +157,9 @@ endfunction
 let g:nnn#set_default_mappings = 0
 let g:nnn#replace_netrw = 1
 nnoremap <C-n> :call nnn#pick(GetCurrentBufferDirectory())<CR>
+
+" vim-clang-format plug configuration
+let g:clang_format#code_style = "google"
+
+nnoremap <C-f> :ClangFormat<CR>
+vnoremap <C-f> :ClangFormat<CR>

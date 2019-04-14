@@ -32,6 +32,7 @@ nvim
   requires python-neovim
   requires python-pytest
   run init.sh for nvim setup
+  requires clang-format
 
 weechat
 
