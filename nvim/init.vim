@@ -91,6 +91,13 @@ nnoremap gk k
 set wrap
 set linebreak
 
+" set how often file is written to disk. Affects gitgutter plugin update time
+set updatetime=100
+
+" always show sign column
+set signcolumn=yes
+
+
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
 
@@ -103,6 +110,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'pboettch/vim-cmake-syntax'
   Plug 'mcchrish/nnn.vim'
   Plug 'rhysd/vim-clang-format'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'kshenoy/vim-signature'
 
 call plug#end()
 
@@ -161,5 +170,5 @@ nnoremap <C-n> :call nnn#pick(GetCurrentBufferDirectory())<CR>
 " vim-clang-format plug configuration
 let g:clang_format#code_style = "google"
 
-nnoremap <C-f> :ClangFormat<CR>
-vnoremap <C-f> :ClangFormat<CR>
+nnoremap <C-s> :ClangFormat<CR>
+vnoremap <C-s> :ClangFormat<CR>
