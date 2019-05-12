@@ -205,7 +205,7 @@ bindcode $mod+$kc_p exec setxkbmap us; exec pkill -RTMIN+10 i3blocks
 bindcode $mod+$kc_bracketleft exec setxkbmap ua -variant winkeys; exec pkill -RTMIN+10 i3blocks
 bindcode $mod+$kc_bracketright exec setxkbmap ru; exec pkill -RTMIN+10 i3blocks
 
-exec_always --no-startup-id xautolock -time 5 -locker "setxkbmap us; pkill -RTMIN+10 i3blocks; /bin/i3lock-fancy -n -p;"
+exec_always --no-startup-id xautolock -time 5 -corners 00-- -locker "setxkbmap us & pkill -RTMIN+10 i3blocks & /bin/i3lock-fancy -n -p & sleep 5 && xset dpms force off"
 
 # Lock hotkey
 bindcode $mod+shift+$kc_x exec xautolock -locknow
