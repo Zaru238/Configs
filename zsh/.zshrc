@@ -105,3 +105,8 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+
+# Shortcut for opening nnn
+function open_nnn(){nnn < $TTY; zle reset-prompt; zle redisplay}
+zle -N open_nnn
+bindkey '^n' open_nnn

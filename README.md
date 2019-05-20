@@ -40,3 +40,11 @@ bitlbee-purple
   resides in aur package
   install purple-skypeweb for enabling skype
   install telegram-purple for enabling telegram
+
+nnn
+  confgired via environment variables which exported in zshenv
+  requires mimeo
+  requures xdg-utils-mimeo
+
+mimeo
+  config resides in ~/.config
