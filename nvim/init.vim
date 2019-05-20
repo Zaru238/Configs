@@ -172,3 +172,10 @@ let g:clang_format#code_style = "google"
 
 nnoremap <C-s> :ClangFormat<CR>
 vnoremap <C-s> :ClangFormat<CR>
+
+"vim-signature plug configuration
+let g:SignatureMap = {
+  \ 'ListBufferMarkers'  :  "<Nop>"
+  \ }
+
+nnoremap m? :SignatureListGlobalMarks<CR>
