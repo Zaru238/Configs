@@ -112,6 +112,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'rhysd/vim-clang-format'
   Plug 'airblade/vim-gitgutter'
   Plug 'kshenoy/vim-signature'
+  Plug 'cohama/lexima.vim'
 
 call plug#end()
 
