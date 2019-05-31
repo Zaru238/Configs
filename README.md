@@ -24,6 +24,8 @@ i3
   requires zsh
   requures dmenu
   requires xkb-layout-state
+  requires xidlehook (aur)
+  requires socat
 
 nvim
   requires ctags

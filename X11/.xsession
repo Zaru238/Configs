@@ -3,7 +3,6 @@ xrandr --output VGA-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --out
 setxkbmap -option caps:escape & # Remap Caps Lock into escape
 xmodmap -e 'clear mod5' &  # Remap AltGr to Alt
 xmodmap -e 'keycode 108 = Alt_L' &
-xset dpms 150 & # Turns off display after n seconds of inactivity
 feh --bg-scale ~/Pictures/wallpaper.png & # Set wallpaper
 compton -b & # start opacity manager
 xhost local:root # allow X11 programs connection located on this machine (for docker)
