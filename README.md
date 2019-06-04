@@ -10,6 +10,7 @@ tmux
 
 zsh
   requires oh my szh plugin manager
+  requires ttf-symbola aur-package
 
 X11
   requires feh
@@ -46,7 +47,7 @@ bitlbee-purple
 nnn
   confgired via environment variables which exported in zshenv
   requires mimeo
-  requures xdg-utils-mimeo
+  requires xdg-utils-mimeo
 
 mimeo
   config resides in ~/.config
