@@ -113,6 +113,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'kshenoy/vim-signature'
   Plug 'cohama/lexima.vim'
+  Plug 'matze/vim-move'
 
 call plug#end()
 
@@ -180,3 +181,6 @@ let g:SignatureMap = {
   \ }
 
 nnoremap m? :SignatureListGlobalMarks<CR>
+
+"vim-move plug configuration
+let g:move_key_modifier = 'C'
