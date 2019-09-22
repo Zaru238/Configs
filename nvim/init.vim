@@ -13,6 +13,9 @@ set incsearch
 set expandtab
 set softtabstop=2
 
+" Suppress completion messages
+set shortmess+=c
+
 " Autoindent stuff
 set shiftwidth=2
 set autoindent
@@ -39,9 +42,12 @@ colorscheme solarized
 " Set the clipboard as the default register
 set clipboard=unnamedplus
 
-" Set swap file save directory
-set swapfile
-set dir=~/.vim/temp
+" Disable swap file
+set noswapfile
+
+" Disable backup files
+set nobackup
+set nowritebackup
 
 " Set case insensetive find, search and etc.
 set ignorecase
@@ -106,7 +112,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.config/nvim/fzf' }
   Plug 'vim-scripts/a.vim'
   Plug 'tpope/vim-commentary'
-  Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
   Plug 'pboettch/vim-cmake-syntax'
   Plug 'mcchrish/nnn.vim'
   Plug 'rhysd/vim-clang-format'
@@ -114,6 +119,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'kshenoy/vim-signature'
   Plug 'cohama/lexima.vim'
   Plug 'matze/vim-move'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -184,3 +190,37 @@ nnoremap m? :SignatureListGlobalMarks<CR>
 
 "vim-move plug configuration
 let g:move_key_modifier = 'C'
+
+" coc plug configuration
+
+" Use K to show documentation in preview window
+nnoremap <silent> <space>k :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Jump between declaration & definition
+nmap <silent>  <space>d <Plug>(coc-definition)
+" Show all references
+nmap <silent> <space>r <Plug>(coc-references)
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>

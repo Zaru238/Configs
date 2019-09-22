@@ -13,6 +13,9 @@ git clone git://github.com/altercation/vim-colors-solarized.git
 cp -r vim-colors-solarized/colors $ConfigDirectory
 rm -rf vim-colors-solarized
 
+# copy coc config file
+cp -r coc-settings.json $ConfigDirectory
+
 #Install plugin manager
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

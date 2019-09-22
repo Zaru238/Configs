@@ -36,6 +36,7 @@ nvim
   requires python-pytest
   run init.sh for nvim setup
   requires clang-format
+  requires nodejs, yarn and ccls (for coc.vim)
 
 weechat
 
