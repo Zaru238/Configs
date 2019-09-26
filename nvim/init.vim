@@ -103,6 +103,10 @@ set updatetime=100
 " always show sign column
 set signcolumn=yes
 
+" shortcuts
+nnoremap <leader>s :wa<CR>
+nnoremap <leader>h :noh<CR>
+
 
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
@@ -215,12 +219,12 @@ nmap <silent>  <space>d <Plug>(coc-definition)
 " Show all references
 nmap <silent> <space>r <Plug>(coc-references)
 " Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+nmap <space>n <Plug>(coc-rename)
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" Do default action for next item.
+nnoremap <silent> <space>k  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>j  :<C-u>CocPrev<CR>
