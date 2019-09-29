@@ -107,13 +107,23 @@ set signcolumn=yes
 nnoremap <leader>s :wa<CR>
 nnoremap <leader>h :noh<CR>
 
+" toggle quickfix window
+function! ToggleQuickfix()
+   let before_win_count = winnr('$')
+   cclose
+   if winnr('$') == before_win_count
+     copen
+   endif
+ endfunction
+
+nnoremap <silent> <space>q :<C-u>call ToggleQuickfix()<CR>
+
 
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
 
   Plug 'itchyny/lightline.vim'
-  Plug 'octol/vim-cpp-enhanced-highlight'
-  Plug 'junegunn/fzf', { 'dir': '~/.config/nvim/fzf' }
+  Plug 'junegunn/fzf.vim' ", { 'dir': '~/.config/nvim/fzf' }
   Plug 'vim-scripts/a.vim'
   Plug 'tpope/vim-commentary'
   Plug 'pboettch/vim-cmake-syntax'
@@ -124,6 +134,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'cohama/lexima.vim'
   Plug 'matze/vim-move'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'Shougo/denite.nvim'
+  Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()
 
@@ -136,14 +148,7 @@ function! LightLineFilename()
   return expand('%')
 endfunction
 
-" vim-cpp-enhanced-highlight plugin configuration (though looks like these
-" options doesn't affect anything
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_experimental_simple_template_highlight = 1
-
-" fzf plugin configuration
+" fzf.vim plugin configuration
 let $FZF_DEFAULT_COMMAND = 'rg --files'
 
 let g:fzf_colors =
@@ -162,6 +167,7 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 nnoremap <C-p> :FZF<CR>
+nnoremap <C-g> :Rg<CR>
 
 " a.vim plugin configuration
 nnoremap <C-a> :A<CR>
