@@ -134,7 +134,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'cohama/lexima.vim'
   Plug 'matze/vim-move'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'Shougo/denite.nvim'
   Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()
@@ -204,7 +203,7 @@ let g:move_key_modifier = 'C'
 " coc plug configuration
 
 " Use K to show documentation in preview window
-nnoremap <silent> <space>k :call <SID>show_documentation()<CR>
+nnoremap <silent> <space>i :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
