@@ -141,7 +141,13 @@ call plug#end()
 " lightline plugin configuration
 let g:lightline =
 \ { 'colorscheme': 'solarized',
-  \ 'component_function': { 'filename': 'LightLineFilename' }, }
+\   'active': {
+\   'left': [ [ 'mode', 'paste' ],
+\             [ 'cocstatus', 'currentfunction','readonly', 'filename', 'modified' ] ] },
+\   'component_function': { 'filename': 'LightLineFilename',
+\                           'cocstatus': 'coc#status',
+\                           'currentfunction': 'CocCurrentFunction',
+\   },}
 
 function! LightLineFilename()
   return expand('%')
@@ -233,3 +239,11 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 nnoremap <silent> <space>k  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>j  :<C-u>CocPrev<CR>
+
+" vim-lsp-cxx-highlight plugin configuration
+" hi default LspCxxHlGroupNamespace ctermfg=Yellow guifg=#BBBB00 cterm=none gui=none
+" hi default LspCxxHlGroupMemberVariable ctermfg=Black guifg=Black
+
+hi link LspCxxHlGroupMemberVariable Normal
+hi link LspCxxHlGroupNamespace cppExceptions
+
