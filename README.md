@@ -34,9 +34,10 @@ nvim
   reguires ripgrep
   requires python-neovim
   requires python-pytest
-  run init.sh for nvim setup
   requires clang-format
   requires nodejs, yarn and ccls-git (for coc.vim)
+  run init.sh for nvim setup
+  run :CocInstall coc-python after coc.vim initialization
 
 weechat
 

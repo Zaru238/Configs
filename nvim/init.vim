@@ -241,9 +241,5 @@ nnoremap <silent> <space>k  :<C-u>CocNext<CR>
 nnoremap <silent> <space>j  :<C-u>CocPrev<CR>
 
 " vim-lsp-cxx-highlight plugin configuration
-" hi default LspCxxHlGroupNamespace ctermfg=Yellow guifg=#BBBB00 cterm=none gui=none
-" hi default LspCxxHlGroupMemberVariable ctermfg=Black guifg=Black
-
-hi link LspCxxHlGroupMemberVariable Normal
+hi default LspCxxHlGroupMemberVariable ctermfg=Brown guifg=Brown
 hi link LspCxxHlGroupNamespace cppExceptions
-
