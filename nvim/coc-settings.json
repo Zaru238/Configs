@@ -17,5 +17,6 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     }
-  }
+  },
+  "python.jediEnabled": false
 }
