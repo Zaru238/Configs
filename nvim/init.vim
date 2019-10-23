@@ -123,7 +123,8 @@ nnoremap <silent> <space>q :<C-u>call ToggleQuickfix()<CR>
 call plug#begin('~/.config/nvim/plugged')
 
   Plug 'itchyny/lightline.vim'
-  Plug 'junegunn/fzf.vim' ", { 'dir': '~/.config/nvim/fzf' }
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
   Plug 'vim-scripts/a.vim'
   Plug 'tpope/vim-commentary'
   Plug 'pboettch/vim-cmake-syntax'
