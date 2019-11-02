@@ -106,6 +106,7 @@ set signcolumn=yes
 " shortcuts
 nnoremap <leader>s :wa<CR>
 nnoremap <leader>h :noh<CR>
+nnoremap <leader>m :wa<CR> :make<CR>
 
 " toggle quickfix window
 function! ToggleQuickfix()
@@ -136,6 +137,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'matze/vim-move'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'jackguo380/vim-lsp-cxx-highlight'
+  Plug 'tpope/vim-surround'
 
 call plug#end()
 
