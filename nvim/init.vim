@@ -138,6 +138,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'jackguo380/vim-lsp-cxx-highlight'
   Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-fugitive'
 
 call plug#end()
 

@@ -38,6 +38,7 @@ nvim
   run init.sh for nvim setup
   requires nodejs, yarn, ccls-git and bash-language-server (for coc.vim)
   run :CocInstall coc-python after coc.vim initialization
+  run :CocInstall coc-highlight after coc.vim initialization
 
 weechat
 
