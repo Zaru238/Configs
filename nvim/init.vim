@@ -136,7 +136,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'cohama/lexima.vim'
   Plug 'matze/vim-move'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'jackguo380/vim-lsp-cxx-highlight'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
 
@@ -243,7 +242,3 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 nnoremap <silent> <space>k  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>j  :<C-u>CocPrev<CR>
-
-" vim-lsp-cxx-highlight plugin configuration
-hi default LspCxxHlGroupMemberVariable ctermfg=Brown guifg=Brown
-hi link LspCxxHlGroupNamespace cppExceptions
