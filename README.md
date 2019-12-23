@@ -25,8 +25,9 @@ i3
   requires zsh
   requures dmenu
   requires xkb-layout-state
-  requires xidlehook (aur)
-  requires socat
+  requires i3lock-fancy (aur)
+  requures xss-lock
+  move lock.sh to ~/bin
 
 nvim
   requires ctags
