@@ -119,6 +119,23 @@ function! ToggleQuickfix()
 
 nnoremap <silent> <space>q :<C-u>call ToggleQuickfix()<CR>
 
+" Misc functions
+function! GetCurrentBufferDirectory()
+  let l:curBufDir = expand('%:p')
+  if isdirectory(l:curBufDir) ==# 0
+    let l:curBufDir = expand('%:p:h')
+  endif
+  return l:curBufDir
+endfunction
+
+function OpenCurrentBufferDirTerminal()
+  let l:currentBufDir = GetCurrentBufferDirectory()
+  execute "belowright split | resize 15 | lcd" currentBufDir "| term"
+endfunction
+
+" Switch to terminal
+nnoremap ! :call OpenCurrentBufferDirTerminal() <CR>
+tnoremap ! <C-\><C-n>
 
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
@@ -136,6 +153,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'cohama/lexima.vim'
   Plug 'matze/vim-move'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'jackguo380/vim-lsp-cxx-highlight'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
 
@@ -181,14 +199,6 @@ nnoremap <C-g> :Rg<CR>
 nnoremap <C-a> :A<CR>
 
 " nnn plugin configuration
-function! GetCurrentBufferDirectory()
-  let l:curBufDir = expand('%:p')
-  if isdirectory(l:curBufDir) ==# 0
-    let l:curBufDir = expand('%:p:h')
-  endif
-  return l:curBufDir
-endfunction
-
 let g:nnn#set_default_mappings = 0
 let g:nnn#replace_netrw = 1
 nnoremap <C-n> :call nnn#pick(GetCurrentBufferDirectory())<CR>
@@ -242,3 +252,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 nnoremap <silent> <space>k  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>j  :<C-u>CocPrev<CR>
+
+" vim-lsp-cxx-highlight plugin configuration
+hi default LspCxxHlGroupMemberVariable ctermfg=Brown guifg=Brown
+hi link LspCxxHlGroupNamespace cppExceptions
