@@ -26,7 +26,8 @@ i3
   requures dmenu
   requires xkb-layout-state
   requires i3lock-fancy (aur)
-  requures xss-lock
+  requires xss-lock
+  requires qutebrowser
   move lock.sh to ~/bin
 
 nvim
@@ -55,3 +56,6 @@ nnn
 
 mimeo
   config resides in ~/.config
+
+qutebrowser
+  config resides in ~./config/qutebrowser
