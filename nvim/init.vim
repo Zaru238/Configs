@@ -156,6 +156,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'jackguo380/vim-lsp-cxx-highlight'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
+  Plug 'goerz/jupytext.vim'
 
 call plug#end()
 
