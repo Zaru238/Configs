@@ -59,3 +59,8 @@ mimeo
 
 qutebrowser
   config resides in ~./config/qutebrowser
+
+gef
+  requires gdb, xdotool
+  config resizes in ~/
+  run sudo pip install keystone-engine ropper unicorn capstone keystone-engine
