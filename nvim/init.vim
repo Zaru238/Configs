@@ -134,8 +134,11 @@ function OpenCurrentBufferDirTerminal()
 endfunction
 
 " Switch to terminal
-nnoremap ! :call OpenCurrentBufferDirTerminal() <CR>
-tnoremap ! <C-\><C-n>
+nnoremap <space>t :call OpenCurrentBufferDirTerminal() <CR>
+tnoremap <C-a> <C-\><C-n>
+
+" yank current buffer to a new tab
+nnoremap gy :tab split<CR>
 
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
@@ -203,6 +206,9 @@ nnoremap <C-a> :A<CR>
 let g:nnn#set_default_mappings = 0
 let g:nnn#replace_netrw = 1
 nnoremap <C-n> :call nnn#pick(GetCurrentBufferDirectory())<CR>
+let g:nnn#action = {
+      \ '<c-t>': 'tab split'}
+
 
 " vim-clang-format plug configuration
 let g:clang_format#code_style = "google"
