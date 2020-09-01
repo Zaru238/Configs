@@ -1,0 +1,50 @@
+Prepare usb stick
+  Format it to 32fat
+  Record the image via dd commane
+
+Bios installation mode
+  Disable secure boot
+  Mode - UEFI only
+
+Initial Installation
+  Follow installation instruction at archlinux wiki
+  Prefer to use GPT partition table
+  Install packages mentioned in installation instruction + vi, network manager and base_devel
+
+  Grub
+    Install grub from the scatch if you install arch on fresh system
+    Use existing grub if a system already has other OSes
+
+First boot
+  setup network via nmcli
+  install sudo
+    sudo pacman -S sudo git
+  Add new user
+    useradd -m -G wheel kziabrev
+    passwd kziabrev
+  Add sudo priveleges
+    visudo
+    # uncomment wheel ALL=(ALL) ALL
+  Login as kziabrev
+  Download configure repo
+    mkdir -p ~/projects
+    cd ~/projects
+    git clone https://github.com/Zaru238/Configs.git
+  Run first script
+    ~/projects/Configs/setup/1.sh
+
+
+TODO: Add to scipt staff that copies i3, i3 blocks and tmux dot files
+      Add i3 staff installation
+      Add vim install script installation
+
+      TODO - add audio setup
+             add libreoffice installation
+             add mupdf installation
+             write about login screen installation
+
+      Fix -  nnn amd mimeo
+            language show at right bottom
+            make qutebroswer config file that is based on new config file - and record diff somewhere
+            add move tabs left right
+            fix swap to last viewed tab hotkey

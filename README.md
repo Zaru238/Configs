@@ -1,7 +1,7 @@
 Arch linux config files
 
 st
-  requires FantasqueSans font
+  requires ttf-hack
   requires zsh
   requires compton
 
