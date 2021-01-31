@@ -68,9 +68,6 @@ set autoread
 set timeoutlen=500
 set ttimeoutlen=100
 
-" generate ctags hotkey
-nnoremap <f5> :!ctags -R -h "h.hpp.c.cpp"<CR>
-
 " Substitute jump to first tag with jump that can handle several destination
 nnoremap <C-]> g<C-]>
 
@@ -101,12 +98,16 @@ set linebreak
 set updatetime=100
 
 " always show sign column
-set signcolumn=yes
+set signcolumn=yes:1
+
+" set sigh column color
+highlight clear SignColumn
+:set signcolumn=yes:1
 
 " shortcuts
-nnoremap <leader>s :wa<CR>
-nnoremap <leader>h :noh<CR>
-nnoremap <leader>m :wa<CR> :make<CR>
+nnoremap <C-s> :wa<CR>
+nnoremap <space>h :noh<CR>
+nnoremap <space>m :wa<CR> :make<CR>
 
 " toggle quickfix window
 function! ToggleQuickfix()
@@ -118,6 +119,10 @@ function! ToggleQuickfix()
  endfunction
 
 nnoremap <silent> <space>q :<C-u>call ToggleQuickfix()<CR>
+
+" Remap iteration hotkeys in insert mode
+inoremap <C-J> <C-N>
+inoremap <C-K> <C-P>
 
 " Misc functions
 function! GetCurrentBufferDirectory()
@@ -137,8 +142,23 @@ endfunction
 nnoremap <space>t :call OpenCurrentBufferDirTerminal() <CR>
 tnoremap <C-a> <C-\><C-n>
 
-" yank current buffer to a new tab
-nnoremap gy :tab split<CR>
+" tab stuff
+nnoremap <silent> <C-t> :tab split<CR>
+nnoremap <silent> K :tabn<CR>
+nnoremap <silent> J :tabp<CR>
+
+nnoremap <silent> <space>1 1gt
+nnoremap <silent> <space>2 2gt
+nnoremap <silent> <space>3 3gt
+nnoremap <silent> <space>4 4gt
+nnoremap <silent> <space>5 5gt
+nnoremap <silent> <space>6 6gt
+nnoremap <silent> <space>7 7gt
+nnoremap <silent> <space>8 8gt
+nnoremap <silent> <space>9 9gt
+
+" replace make with control.py
+set makeprg=python\ -u\ control.py
 
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
@@ -146,7 +166,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'vim-scripts/a.vim'
   Plug 'tpope/vim-commentary'
   Plug 'pboettch/vim-cmake-syntax'
   Plug 'mcchrish/nnn.vim'
@@ -160,6 +179,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
   Plug 'goerz/jupytext.vim'
+  Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
 
 call plug#end()
 
@@ -199,9 +219,6 @@ let g:fzf_colors =
 nnoremap <C-p> :FZF<CR>
 nnoremap <C-g> :Rg<CR>
 
-" a.vim plugin configuration
-nnoremap <C-a> :A<CR>
-
 " nnn plugin configuration
 let g:nnn#set_default_mappings = 0
 let g:nnn#replace_netrw = 1
@@ -213,8 +230,8 @@ let g:nnn#action = {
 " vim-clang-format plug configuration
 let g:clang_format#code_style = "google"
 
-nnoremap <C-s> :ClangFormat<CR>
-vnoremap <C-s> :ClangFormat<CR>
+nnoremap <space>w :ClangFormat<CR>
+vnoremap <space>w :ClangFormat<CR>
 
 "vim-signature plug configuration
 let g:SignatureMap = {
@@ -246,20 +263,52 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Jump between declaration & definition
-nmap <silent>  <space>d <Plug>(coc-definition)
+nmap <silent> <space>d <Plug>(coc-definition)
 " Show all references
 nmap <silent> <space>r <Plug>(coc-references)
 " Remap for rename current word
 nmap <space>n <Plug>(coc-rename)
+" Autofix
+nmap <silent> <space>f <Plug>(coc-fix-current)
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>s :<C-u> CocList -I symbols<cr>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent> <space>p :<C-u> CocListResume<CR>
 " Do default action for next item.
-nnoremap <silent> <space>k  :<C-u>CocNext<CR>
+nnoremap <silent> <space>k :<C-u> CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>j  :<C-u>CocPrev<CR>
+nnoremap <silent> <space>j :<C-u> CocPrev<CR>
+" Switch between header and source files (C/C++ only)
+nnoremap <silent> <C-a> :CocCommand clangd.switchSourceHeader<CR>
 
 " vim-lsp-cxx-highlight plugin configuration
 hi default LspCxxHlGroupMemberVariable ctermfg=Brown guifg=Brown
 hi link LspCxxHlGroupNamespace cppExceptions
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+
+" lexima plugin configuration
+call lexima#add_rule({'char': '}', 'at': '\%#\n\s*}', 'leave': '}'})
+call lexima#add_rule({'char': ']', 'at': '\%#\n\s*]', 'leave': ']'})
+call lexima#add_rule({'char': ')', 'at': '\%#\n\s*)', 'leave': ')'})
+" lexima passes over closing parentheses that were entered during this insert
+" session
+
+" nvim-gdb plugin configuration
+let g:nvimgdb_config_override = {
+  \ 'key_until':      '<leader>u',
+  \ 'key_continue':   '<leader>c',
+  \ 'key_next':       '<leader>n',
+  \ 'key_step':       '<leader>s',
+  \ 'key_finish':     '<leader>f',
+  \ 'key_breakpoint': '<leader>b',
+  \ 'key_frameup':    '<leader>y',
+  \ 'key_framedown':  '<leader>e',
+  \ 'key_eval':       '<leader>d',
+  \ 'key_quit':       '<leader>q',
+  \ 'sign_current_line': '▶',
+  \ 'sign_breakpoint': [ '●', '●²', '●³', '●⁴', '●⁵', '●⁶', '●⁷', '●⁸', '●⁹', '●ⁿ' ],
+  \ 'sign_breakpoint_priority': 10,
+  \ 'codewin_command': 'new'
+  \ }

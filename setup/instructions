@@ -12,7 +12,7 @@ Initial Installation
   Install packages mentioned in installation instruction + vi, network manager and base_devel
 
   Grub
-    Install grub from the scatch if you install arch on fresh system
+    Install grub from the scratch if you install arch on fresh system
     Use existing grub if a system already has other OSes
 
 First boot
@@ -34,17 +34,5 @@ First boot
     ~/projects/Configs/setup/1.sh
 
 
-TODO: Add to scipt staff that copies i3, i3 blocks and tmux dot files
-      Add i3 staff installation
-      Add vim install script installation
 
-      TODO - add audio setup
-             add libreoffice installation
-             add mupdf installation
-             write about login screen installation
-
-      Fix -  nnn amd mimeo
-            language show at right bottom
-            make qutebroswer config file that is based on new config file - and record diff somewhere
-            add move tabs left right
-            fix swap to last viewed tab hotkey
+              vim improvoments - make left column wider

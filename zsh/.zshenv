@@ -9,3 +9,6 @@ export NNN_CONTEXT_COLORS='4236'
 
 # used by nnn for putting dot files on top
 export LC_COLLATE="C"
+
+# used for qutebrowser hook
+export PATH=~/bin:${PATH}
