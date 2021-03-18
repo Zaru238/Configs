@@ -1,84 +1,78 @@
-29c29
+34c34
 < c.auto_save.session = False
 ---
 > c.auto_save.session = True
-875c875
-< c.content.pdfjs = False
----
-> c.content.pdfjs = True
-989c989
+1070c1070
 < c.downloads.location.suggestion = 'path'
 ---
 > c.downloads.location.suggestion = 'both'
-1002c1002
+1083c1083
 < c.downloads.position = 'top'
 ---
 > c.downloads.position = 'bottom'
-1016c1016
+1097c1097
 < c.editor.command = ['gvim', '-f', '{file}', '-c', 'normal {line}G{column0}l']
 ---
 > c.editor.command = ['st', '-e', 'nvim', '{}']
-1050c1050
+1158c1158
 < c.fonts.default_size = '10pt'
 ---
 > c.fonts.default_size = '15pt'
-1432c1432
+1566c1566
 < c.scrolling.smooth = False
 ---
 > c.scrolling.smooth = True
-1459c1459
+1593c1593
 < c.session.lazy_restore = False
 ---
 > c.session.lazy_restore = True
-1596c1596
+1734c1734
 < c.tabs.last_close = 'ignore'
 ---
 > c.tabs.last_close = 'close'
-1611c1611
+1749c1749
 < c.tabs.min_width = -1
 ---
 > c.tabs.min_width = 30
-1649c1649
+1787c1787
 < c.tabs.new_position.unrelated = 'last'
 ---
 > c.tabs.new_position.unrelated = 'next'
-1678c1678
+1816c1816
 < c.tabs.select_on_remove = 'next'
 ---
 > c.tabs.select_on_remove = 'last-used'
-1756c1756
+1895c1895
 < c.url.default_page = 'https://start.duckduckgo.com/'
 ---
 > c.url.default_page = 'https://google.com/'
-1792c1792
+1932c1932
 < c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
 ---
 > c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}'}
-1796c1796
+1936c1936
 < c.url.start_pages = ['https://start.duckduckgo.com']
 ---
 > c.url.start_pages = ['https://google.com']
-1879c1879
+2028c2028
 < config.bind('<Ctrl-^>', 'tab-focus last')
 ---
 > config.bind('<^>', 'tab-focus last')
-1897,1898c1897,1898
+2046,2047c2046,2047
 < config.bind('J', 'tab-next')
 < config.bind('K', 'tab-prev')
 ---
 > config.bind('K', 'tab-next')
 > config.bind('J', 'tab-prev')
-1937c1937
-< config.bind('gl', 'tab-move -')
----
-> config.bind('<CTRL-j>', 'tab-move -')
-1940c1940
-< config.bind('gr', 'tab-move +')
+2078,2079c2078,2079
+< config.bind('gJ', 'tab-move +')
+< config.bind('gK', 'tab-move -')
 ---
 > config.bind('<CTRL-K>', 'tab-move +')
-2063a2064,2065
+> config.bind('<CTRL-j>', 'tab-move -')
+2199a2200,2201
 > config.bind('<Ctrl-J>', 'completion-item-focus --history next', mode='command')
 > config.bind('<Ctrl-K>', 'completion-item-focus --history prev', mode='command')
-2089a2092,2093
+2239a2242,2243
 > config.bind('<Ctrl-J>', 'fake-key <Down>', mode='insert')
 > config.bind('<Ctrl-K>', 'fake-key <Up>', mode='insert')
