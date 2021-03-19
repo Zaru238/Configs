@@ -20,6 +20,11 @@ yay -S compton ttf-hack
 yay -S mesa xorg noto-fonts i3
 
 #install staff needed for i3
+yay -S rofi
+
+# Copy rofi config
+mkdir ~/.config/rofi
+cp ~/projects/Configs/rofi ~/.config/rofi
 
 #TODO put an wallpaper to config repo and copy it
 

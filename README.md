@@ -23,7 +23,7 @@ i3
   requires nnn  
   requires tmux  
   requires zsh  
-  requures dmenu  
+  requures rofi  
   requires xkb-layout-state  
   requires i3lock-fancy (aur)  
   requires xss-lock  
