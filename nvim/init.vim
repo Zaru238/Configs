@@ -1,3 +1,6 @@
+"Indicate via environment variable that we inside vim
+let $INSIDE_NVIM = 1
+
 " how relative line numbers and min number colomn width
 set number
 set relativenumber
@@ -222,6 +225,7 @@ nnoremap <C-g> :Rg<CR>
 " nnn plugin configuration
 let g:nnn#set_default_mappings = 0
 let g:nnn#replace_netrw = 1
+let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.8, 'border' : 'rounded' } }
 nnoremap <C-n> :call nnn#pick(GetCurrentBufferDirectory())<CR>
 let g:nnn#action = {
       \ '<c-t>': 'tab split'}
