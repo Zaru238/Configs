@@ -4,6 +4,12 @@
  * Copyright: 2017 leofa
  ***********************************************/
 
+configuration {
+    kb-row-up: "Control+k";
+    kb-row-down: "Control+j";
+    kb-remove-to-eol: "";
+    kb-accept-entry: "Control+semicolon,Control+m,Return,KP_Enter";
+}
 
 * {
     font: "hack 15";

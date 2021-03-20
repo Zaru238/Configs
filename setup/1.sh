@@ -26,6 +26,12 @@ yay -S rofi
 mkdir ~/.config/rofi
 cp ~/projects/Configs/rofi ~/.config/rofi
 
+# Install enable greenclip clipboard manager
+yay -S rofi-greenclip
+
+systemctl --user enable greenclip.service
+systemctl --user start greenclip.service
+
 #TODO put an wallpaper to config repo and copy it
 
 #copy xsession config

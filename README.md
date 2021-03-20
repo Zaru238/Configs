@@ -24,6 +24,7 @@ i3
   requires tmux  
   requires zsh  
   requures rofi  
+  requites greenclip  
   requires xkb-layout-state  
   requires i3lock-fancy (aur)  
   requires xss-lock  
