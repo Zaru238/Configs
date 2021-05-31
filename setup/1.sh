@@ -10,11 +10,9 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-#install st
-cp -r ~/projects/Configs/st ~/aur
-cd ~/aur/st
-makepkg -si
-yay -S compton ttf-hack
+#install alacritty
+yay -S compton ttf-hack alacritty
+cp  ~/projects/Configs/alacritty/.alacritty.yml ~/
 
 #install video staff & i3
 yay -S mesa xorg noto-fonts i3
@@ -38,7 +36,7 @@ systemctl --user start greenclip.service
 cp ~/projects/Configs/X11/.xsession ~/
 
 #install zsh and staff
-yay -S zsh oh-my-zsh-git tmux xclip ttf-symbola
+yay -S zsh oh-my-zsh-git xclip ttf-symbola
 #copy zsh configs
 cp ~/projects/Configs/zsh/.zshrc ~/
 cp ~/projects/Configs/zsh/.zshenv ~/
@@ -46,10 +44,6 @@ cp ~/projects/Configs/zsh/.zshenv ~/
 #install nnn
 yay -S nnn
 # TODO install file picker
-
-#install tmux
-yay -S tmux
-cp ~/projects/Configs/tmux/.tmux.conf ~/
 
 #install qutebroswer
 yay -S qutebroswer

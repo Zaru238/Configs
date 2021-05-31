@@ -75,10 +75,10 @@ font pango:Roboto 10
 floating_modifier $mod
 
 # start a terminal
-bindcode $mod+$kc_return exec st -e tmux
+bindcode $mod+$kc_return exec alacritty
 
 # start console file manager
-bindsym $mod+n exec st -e tmux new-session 'nnn -e'
+bindsym $mod+n exec alacritty -e nnn
 
 # kill focused window
 bindcode $mod+Shift+$kc_q kill

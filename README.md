@@ -1,12 +1,9 @@
 Arch linux config files
 
-st
+alacritty
   requires ttf-hack  
   requires zsh  
   requires picom  
-
-tmux
-  requires xclip  
 
 zsh
   requires oh my szh plugin manager  
@@ -21,7 +18,7 @@ i3
   requires i3blocks  
   requires i3lock-fancy-multimonitor  
   requires nnn  
-  requires tmux  
+  requires alacritty  
   requires zsh  
   requures rofi  
   requites greenclip  
