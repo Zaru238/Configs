@@ -110,7 +110,7 @@ highlight clear SignColumn
 " shortcuts
 nnoremap <C-s> :wa<CR>
 nnoremap <space>h :noh<CR>
-nnoremap <space>m :wa<CR> :make<CR>
+nnoremap <space>m :wa <bar> make <CR>
 
 " toggle quickfix window
 function! ToggleQuickfix()
