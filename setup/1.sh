@@ -20,6 +20,9 @@ yay -S mesa xorg noto-fonts i3
 #install staff needed for i3
 yay -S rofi
 
+#install i3-blocks
+yay -S i3blocks-contrib xkblayout-state
+
 # Copy rofi config
 mkdir ~/.config/rofi
 cp ~/projects/Configs/rofi ~/.config/rofi

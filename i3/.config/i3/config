@@ -58,7 +58,7 @@ set $hr_right 46
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Roboto 10
+font pango:Hack 12
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -198,10 +198,43 @@ mode "resize" {
 
 bindcode $mod+$kc_t mode "resize"
 
+workspace_auto_back_and_forth yes
+
+# Colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #404552 #268bd2 #F9F9F9 #268bd2   #404552
+client.focused_inactive #404552 #404552 #C4CBD4 #484e50   #404552
+client.unfocused        #404552 #404552 #C4CBD4 #292d2e   #404552
+client.urgent           #CC6666 #900000 #C4CBD4 #CC6666   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3blocks -c ~/.config/i3blocks/config
+        status_command SCRIPT_DIR=/usr/lib/i3blocks i3blocks
+
+        # Disable scrolling
+        bindsym button4 nop
+        bindsym button5 nop
+
+        workspace_min_width 40
+
+        font pango:Hack 12
+
+        colors {
+            background #2D303B
+            statusline #F9F9F9
+            separator #666666
+
+            # class           border  bg      text
+            focused_workspace  #404552 #268bd2 #F9F9F9
+            active_workspace   #333333 #404552 #C4CBD4
+            inactive_workspace #333333 #404552 #C4CBD4
+            urgent_workspace   #2f343a #900000 #C4CBD4
+            binding_mode       #2f343a #900000 #C4CBD4
+        }
 }
 
 # Switch keyboard layout
@@ -209,11 +242,12 @@ bindcode $mod+$kc_p exec setxkbmap us; exec pkill -RTMIN+10 i3blocks
 bindcode $mod+$kc_bracketleft exec setxkbmap ua -variant winkeys; exec pkill -RTMIN+10 i3blocks
 bindcode $mod+$kc_bracketright exec setxkbmap ru; exec pkill -RTMIN+10 i3blocks
 
-exec_always --no-startup-id xset s 300
-exec_always --no-startup-id xset dpms 300
+# exec_always --no-startup-id xset s 600
+exec_always --no-startup-id xset dpms 600
+exec_always --no-startup-id xset b off  # turn off bell
 exec_always --no-startup-id xss-lock ~/bin/lock.sh
 
 # Lock hotkey
-bindcode $mod+shift+$kc_x exec "setxkbmap us & pkill -RTMIN+10 i3blocks & i3lock-fancy -p"
+bindcode $mod+shift+$kc_x exec ~/bin/lock.sh
 # Startup programs
 exec qutebrowser

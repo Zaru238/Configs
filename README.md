@@ -16,6 +16,8 @@ X11
 
 i3
   requires i3blocks  
+  requires i3blocks-contrib  
+  requires xkblayout-state  
   requires i3lock-fancy-multimonitor  
   requires nnn  
   requires alacritty  
