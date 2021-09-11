@@ -3,10 +3,11 @@
 set -e
 
 ConfigDirectory=$HOME/.config/nvim
+RelativeScriptDir=$(dirname "$0")
 
 mkdir -p $ConfigDirectory
 
-cp init.vim $ConfigDirectory
+cp $RelativeScriptDir/init.vim $ConfigDirectory
 
 # setup solarized color scheme
 git clone git://github.com/altercation/vim-colors-solarized.git
