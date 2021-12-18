@@ -12,7 +12,7 @@
 
 # This is here so configs done via the GUI are still loaded.
 # Remove it to not load settings done via the GUI.
-config.load_autoconfig(True)
+config.load_autoconfig(False)
 
 # Aliases for commands. The keys of the given dictionary are the
 # aliases, while the values are the commands they map to.
@@ -55,12 +55,18 @@ c.auto_save.session = True
 #   - webkit: Use QtWebKit (based on WebKit, similar to Safari - many known security issues!).
 c.backend = 'webengine'
 
-# This setting can be used to map keys to other keys. When the key used
-# as dictionary-key is pressed, the binding for the key used as
-# dictionary-value is invoked instead. This is useful for global
-# remappings of keys, for example to map Ctrl-[ to Escape. Note that
-# when a key is bound (via `bindings.default` or `bindings.commands`),
-# the mapping is ignored.
+# Map keys to other keys, so that they are equivalent in all modes. When
+# the key used as dictionary-key is pressed, the binding for the key
+# used as dictionary-value is invoked instead. This is useful for global
+# remappings of keys, for example to map <Ctrl-[> to <Escape>. NOTE:
+# This should only be used if two keys should always be equivalent, i.e.
+# for things like <Enter> (keypad) and <Return> (non-keypad). For normal
+# command bindings, qutebrowser works differently to vim: You always
+# bind keys to commands, usually via `:bind` or `config.bind()`. Instead
+# of using this setting, consider finding the command a key is bound to
+# (e.g. via `:bind gg`) and then binding the same command to the desired
+# key. Note that when a key is bound (via `bindings.default` or
+# `bindings.commands`), the mapping is ignored.
 # Type: Dict
 c.bindings.key_mappings = {'<Ctrl-[>': '<Escape>', '<Ctrl-6>': '<Ctrl-^>', '<Ctrl-M>': '<Return>', '<Ctrl-J>': '<Return>', '<Ctrl-I>': '<Tab>', '<Shift-Return>': '<Return>', '<Enter>': '<Return>', '<Shift-Enter>': '<Return>', '<Ctrl-Enter>': '<Ctrl-Return>'}
 
@@ -286,6 +292,10 @@ c.colors.prompts.fg = 'white'
 # Background color for the selected item in filename prompts.
 # Type: QssColor
 c.colors.prompts.selected.bg = 'grey'
+
+# Foreground color for the selected item in filename prompts.
+# Type: QssColor
+c.colors.prompts.selected.fg = 'white'
 
 # Background color of the statusbar in caret mode.
 # Type: QssColor
@@ -675,6 +685,12 @@ c.content.blocking.adblock.lists = ['https://easylist.to/easylist/easylist.txt',
 # Type: Bool
 c.content.blocking.enabled = True
 
+# Block subdomains of blocked hosts. Note: If only a single subdomain is
+# blocked but should be allowed, consider using
+# `content.blocking.whitelist` instead.
+# Type: Bool
+c.content.blocking.hosts.block_subdomains = True
+
 # List of URLs to host blocklists for the host blocker.  Only used when
 # the simple host-blocker is used (see `content.blocking.method`).  The
 # file can be in one of the following formats:  - An `/etc/hosts`-like
@@ -746,7 +762,14 @@ c.content.canvas_reading = True
 # unknown-3rdparty` per-domain on QtWebKit will have the same effect as
 # `all`. If this setting is used with URL patterns, the pattern gets
 # applied to the origin/first party URL of the page making the request,
-# not the request URL.
+# not the request URL. With QtWebEngine 5.15.0+, paths will be stripped
+# from URLs, so URL patterns using paths will not match. With
+# QtWebEngine 5.15.2+, subdomains are additionally stripped as well, so
+# you will typically need to set this setting for `example.com` when the
+# cookie is set on `somesubdomain.example.com` for it to work properly.
+# To debug issues with this setting, start qutebrowser with `--debug
+# --logfilter network --debug-flag log-cookies` which will show all
+# cookies being set.
 # Type: String
 # Valid values:
 #   - all: Accept all cookies.
@@ -815,8 +838,10 @@ c.content.headers.custom = {}
 c.content.headers.do_not_track = True
 
 # When to send the Referer header. The Referer header tells websites
-# from which website you were coming from when visiting them. No restart
-# is needed with QtWebKit.
+# from which website you were coming from when visiting them. Note that
+# with QtWebEngine, websites can override this preference by setting the
+# `Referrer-Policy:` header, so that any websites visited from them get
+# the full referer. No restart is needed with QtWebKit.
 # Type: String
 # Valid values:
 #   - always: Always send the Referer.
@@ -948,7 +973,34 @@ c.content.netrc_file = None
 #   - true
 #   - false
 #   - ask
-c.content.notifications = 'ask'
+c.content.notifications.enabled = 'ask'
+
+# What notification presenter to use for web notifications. Note that
+# not all implementations support all features of notifications: - With
+# PyQt 5.14, any setting other than `qt` does not support  the `click`
+# and   `close` events, as well as the `tag` option to replace existing
+# notifications. - The `qt` and `systray` options only support showing
+# one notification at the time   and ignore the `tag` option to replace
+# existing notifications. - The `herbe` option only supports showing one
+# notification at the time and doesn't   show icons. - The `messages`
+# option doesn't show icons and doesn't support the `click` and
+# `close` events.
+# Type: String
+# Valid values:
+#   - auto: Tries `libnotify`, `systray` and `messages`, uses the first one available without showing error messages.
+#   - qt: Use Qt's native notification presenter, based on a system tray icon. Switching from or to this value requires a restart of qutebrowser. Recommended over `systray` on PyQt 5.14.
+#   - libnotify: Shows messages via DBus in a libnotify-compatible way. If DBus isn't available, falls back to `systray` or `messages`, but shows an error message.
+#   - systray: Use a notification presenter based on a systray icon. Falls back to `libnotify` or `messages` if not systray is available. This is a reimplementation of the `qt` setting value, but with the possibility to switch to it at runtime.
+#   - messages: Show notifications as qutebrowser messages. Most notification features aren't available.
+#   - herbe: (experimental!) Show notifications using herbe (github.com/dudik/herbe). Most notification features aren't available.
+c.content.notifications.presenter = 'auto'
+
+# Whether to show the origin URL for notifications. Note that URL
+# patterns with this setting only get matched against the origin part of
+# the URL, so e.g. paths in patterns will never match. Note that with
+# the `qt` presenter, origins are never shown.
+# Type: Bool
+c.content.notifications.show_origin = True
 
 # Allow pdf.js to view PDF files in the browser. Note that the files can
 # still be downloaded by clicking the download button in the pdf.js
@@ -969,6 +1021,14 @@ c.content.persistent_storage = 'ask'
 # Type: Bool
 c.content.plugins = False
 
+# Request websites to minimize non-essentials animations and motion.
+# This results in the `prefers-reduced-motion` CSS media query to
+# evaluate to `reduce` (rather than `no-preference`). On Windows, if
+# this setting is set to False, the system-wide animation setting is
+# considered.
+# Type: Bool
+c.content.prefers_reduced_motion = False
+
 # Draw the background color and images also when the page is printed.
 # Type: Bool
 c.content.print_element_backgrounds = True
@@ -981,7 +1041,8 @@ c.content.private_browsing = False
 # Proxy to use. In addition to the listed values, you can use a
 # `socks://...` or `http://...` URL. Note that with QtWebEngine, it will
 # take a couple of seconds until the change is applied, if this value is
-# changed at runtime.
+# changed at runtime. Authentication for SOCKS proxies isn't supported
+# due to Chromium limitations.
 # Type: Proxy
 # Valid values:
 #   - system: Use the system wide proxy.
@@ -1004,15 +1065,35 @@ c.content.register_protocol_handler = 'ask'
 # Enable quirks (such as faked user agent headers) needed to get
 # specific sites to work properly.
 # Type: Bool
-c.content.site_specific_quirks = True
+c.content.site_specific_quirks.enabled = True
 
-# Validate SSL handshakes.
-# Type: BoolAsk
+# Disable a list of named quirks. The js-string-replaceall quirk is
+# needed for Nextcloud Calendar < 2.2.0 with QtWebEngine < 5.15.3.
+# However, the workaround is not fully compliant to the ECMAScript spec
+# and might cause issues on other websites, so it's disabled by default.
+# Type: FlagList
 # Valid values:
-#   - true
-#   - false
-#   - ask
-c.content.ssl_strict = 'ask'
+#   - ua-whatsapp
+#   - ua-google
+#   - ua-slack
+#   - ua-googledocs
+#   - js-whatsapp-web
+#   - js-discord
+#   - js-string-replaceall
+#   - js-globalthis
+#   - js-object-fromentries
+#   - misc-krunker
+#   - misc-mathml-darkmode
+c.content.site_specific_quirks.skip = ['js-string-replaceall']
+
+# How to proceed on TLS certificate errors.
+# Type: String
+# Valid values:
+#   - ask: Ask how to proceed for every certificate error (unless non-overridable due to HSTS).
+#   - ask-block-thirdparty: Ask how to proceed for normal page loads, but silently block resource loads.
+#   - block: Automatically block loading on certificate errors.
+#   - load-insecurely: Force loading pages despite certificate errors. This is *insecure* and should be avoided. Instead of using this, consider fixing the underlying issue or importing a self-signed certificate via `certutil` (or Chromium) instead.
+c.content.tls.certificate_errors = 'ask'
 
 # How navigation requests to URLs with unknown schemes are handled.
 # Type: String
@@ -1082,6 +1163,13 @@ c.downloads.open_dispatcher = None
 #   - bottom
 c.downloads.position = 'bottom'
 
+# Automatically abort insecure (HTTP) downloads originating from secure
+# (HTTPS) pages. For per-domain settings, the relevant URL is the URL
+# initiating the download, not the URL the download itself is coming
+# from. It's not recommended to set this setting to false globally.
+# Type: Bool
+c.downloads.prevent_mixed_content = True
+
 # Duration (in milliseconds) to wait before removing finished downloads.
 # If set to -1, downloads are never removed.
 # Type: Int
@@ -1094,11 +1182,19 @@ c.downloads.remove_finished = -1
 # `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
 # Same as `{column}`, but starting from index 0.
 # Type: ShellCommand
-c.editor.command = ['st', '-e', 'nvim', '{}']
+c.editor.command = ['alacritty', '-e', 'nvim', '{}']
 
 # Encoding to use for the editor.
 # Type: Encoding
 c.editor.encoding = 'utf-8'
+
+# Command (and arguments) to use for selecting a single folder in forms.
+# The command should write the selected folder path to the specified
+# file or stdout. The following placeholders are defined: * `{}`:
+# Filename of the file to be written to. If not contained in any
+# argument, the   standard output of the command is read instead.
+# Type: ShellCommand
+c.fileselect.folder.command = ['xterm', '-e', 'ranger', '--choosedir={}']
 
 # Handler for selecting file(s) in forms. If `external`, then the
 # commands specified by `fileselect.single_file.command` and
@@ -1367,6 +1463,11 @@ c.input.insert_mode.plugins = False
 # Type: Bool
 c.input.links_included_in_focus_chain = True
 
+# Whether the underlying Chromium should handle media keys. On Linux,
+# disabling this also disables Chromium's MPRIS integration.
+# Type: Bool
+c.input.media_keys = True
+
 # Enable back and forward buttons on the mouse.
 # Type: Bool
 c.input.mouse.back_forward_buttons = True
@@ -1563,7 +1664,7 @@ c.scrolling.bar = 'overlay'
 # Enable smooth scrolling for web pages. Note smooth scrolling does not
 # work with the `:scroll-px` command.
 # Type: Bool
-c.scrolling.smooth = True
+c.scrolling.smooth = False
 
 # When to find text on a page case-insensitively.
 # Type: IgnoreCase
@@ -1662,7 +1763,7 @@ c.statusbar.position = 'bottom'
 c.statusbar.show = 'always'
 
 # List of widgets displayed in the statusbar.
-# Type: List of String
+# Type: List of StatusbarWidget
 # Valid values:
 #   - url: Current page URL.
 #   - scroll: Percentage of the current page position like `10%`.
@@ -1671,6 +1772,7 @@ c.statusbar.show = 'always'
 #   - tabs: Current active tab, e.g. `2`.
 #   - keypress: Display pressed keys when composing a vi command.
 #   - progress: Progress bar for the current page loading.
+#   - text:foo: Display the static text after the colon, `foo` in the example.
 c.statusbar.widgets = ['keypress', 'url', 'scroll', 'history', 'tabs', 'progress']
 
 # Open new tabs (middleclick/ctrl+click) in the background.
@@ -1892,7 +1994,7 @@ c.url.auto_search = 'naive'
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = 'https://google.com/'
+c.url.default_page = 'https://google.com'
 
 # URL segments where `:navigate increment/decrement` will search for a
 # number.
@@ -2056,7 +2158,7 @@ config.bind('Sb', 'bookmark-list --jump')
 config.bind('Sh', 'history')
 config.bind('Sq', 'bookmark-list')
 config.bind('Ss', 'set')
-config.bind('T', 'tab-focus')
+config.bind('T', 'set-cmd-text -sr :tab-focus')
 config.bind('U', 'undo -w')
 config.bind('V', 'mode-enter caret ;; selection-toggle --line')
 config.bind('ZQ', 'quit')
@@ -2076,7 +2178,7 @@ config.bind('gB', 'set-cmd-text -s :bookmark-load -t')
 config.bind('gC', 'tab-clone')
 config.bind('gD', 'tab-give')
 config.bind('<CTRL-K>', 'tab-move +')
-config.bind('<CTRL-j>', 'tab-move -')
+config.bind('<CTRL-J>', 'tab-move -')
 config.bind('gO', 'set-cmd-text :open -t -r {url:pretty}')
 config.bind('gU', 'navigate up -t')
 config.bind('g^', 'tab-focus 1')
@@ -2197,8 +2299,10 @@ config.bind('{', 'move-to-end-of-prev-block', mode='caret')
 config.bind('}', 'move-to-end-of-next-block', mode='caret')
 
 # Bindings for command mode
-config.bind('<Ctrl-J>', 'completion-item-focus --history next', mode='command')
-config.bind('<Ctrl-K>', 'completion-item-focus --history prev', mode='command')
+config.bind('<Ctrl-Shift-J>', 'completion-item-focus --history next', mode='command')
+config.bind('<Ctrl-Shift-K>', 'completion-item-focus --history prev', mode='command')
+config.bind('<Ctrl-J>', 'completion-item-focus next', mode='command')
+config.bind('<CtrL-K>', 'completion-item-focus next', mode='command')
 config.bind('<Alt-B>', 'rl-backward-word', mode='command')
 config.bind('<Alt-Backspace>', 'rl-backward-kill-word', mode='command')
 config.bind('<Alt-D>', 'rl-kill-word', mode='command')
@@ -2228,8 +2332,8 @@ config.bind('<PgUp>', 'completion-item-focus prev-page', mode='command')
 config.bind('<Return>', 'command-accept', mode='command')
 config.bind('<Shift-Delete>', 'completion-item-del', mode='command')
 config.bind('<Shift-Tab>', 'completion-item-focus prev', mode='command')
-config.bind('<Tab>', 'completion-item-focus next', mode='command')
-config.bind('<Up>', 'completion-item-focus --history prev', mode='command')
+#config.bind('<Tab>', 'completion-item-focus next', mode='command')
+#config.bind('<Up>', 'completion-item-focus --history prev', mode='command')
 
 # Bindings for hint mode
 config.bind('<Ctrl-B>', 'hint all tab-bg', mode='hint')
@@ -2243,6 +2347,7 @@ config.bind('<Ctrl-J>', 'fake-key <Down>', mode='insert')
 config.bind('<Ctrl-K>', 'fake-key <Up>', mode='insert')
 config.bind('<Ctrl-E>', 'edit-text', mode='insert')
 config.bind('<Escape>', 'mode-leave', mode='insert')
+config.bind('<Shift-Escape>', 'fake-key <Escape>', mode='insert')
 config.bind('<Shift-Ins>', 'insert-text -- {primary}', mode='insert')
 
 # Bindings for passthrough mode
@@ -2271,8 +2376,8 @@ config.bind('<Down>', 'prompt-item-focus next', mode='prompt')
 config.bind('<Escape>', 'mode-leave', mode='prompt')
 config.bind('<Return>', 'prompt-accept', mode='prompt')
 config.bind('<Shift-Tab>', 'prompt-item-focus prev', mode='prompt')
-config.bind('<Tab>', 'prompt-item-focus next', mode='prompt')
-config.bind('<Up>', 'prompt-item-focus prev', mode='prompt')
+config.bind('<Ctrl-J>', 'prompt-item-focus next', mode='prompt')
+config.bind('<Ctrl-K>', 'prompt-item-focus prev', mode='prompt')
 
 # Bindings for register mode
 config.bind('<Escape>', 'mode-leave', mode='register')

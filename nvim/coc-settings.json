@@ -1,4 +1,5 @@
 {
   "clangd.semanticHighlighting": true,
+  "coc.preferences.semanticTokensHighlights": false,
   "clangd.arguments": ["-cross-file-rename"]
 }
