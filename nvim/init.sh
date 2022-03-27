@@ -9,11 +9,6 @@ mkdir -p $ConfigDirectory
 
 cp $RelativeScriptDir/init.vim $ConfigDirectory
 
-# setup solarized color scheme
-git clone git://github.com/altercation/vim-colors-solarized.git
-cp -r vim-colors-solarized/colors $ConfigDirectory
-rm -rf vim-colors-solarized
-
 # copy coc config file
 cp -r coc-settings.json $ConfigDirectory
 

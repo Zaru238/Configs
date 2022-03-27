@@ -37,11 +37,6 @@ set wildmode=full
 " Set search directories path
 set path+=**
 
-" Editor colorscheme
-set t_Co=16
-set background=dark " dark | light "
-colorscheme solarized
-
 " Set the clipboard as the default register
 set clipboard=unnamedplus
 
@@ -161,7 +156,7 @@ nnoremap <silent> <space>8 8gt
 nnoremap <silent> <space>9 9gt
 
 " replace make with control.py
-set makeprg=python\ -u\ control.py
+set makeprg=python3\ -u\ control.py
 
 " plugin istallation
 call plug#begin('~/.config/nvim/plugged')
@@ -178,11 +173,13 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'cohama/lexima.vim'
   Plug 'matze/vim-move'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'jackguo380/vim-lsp-cxx-highlight'
+  " Plug 'jackguo380/vim-lsp-cxx-highlight'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
   Plug 'goerz/jupytext.vim'
   Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
+  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+  Plug 'overcache/NeoSolarized'
 
 call plug#end()
 
@@ -249,6 +246,10 @@ let g:move_key_modifier = 'C'
 
 " coc plug configuration
 
+let g:coc_default_semantic_highlight_groups = 1
+
+" hi default CocSemVariable ctermfg=Brown guifg=Brown
+
 " Use K to show documentation in preview window
 nnoremap <silent> <space>i :call <SID>show_documentation()<CR>
 
@@ -286,11 +287,11 @@ nnoremap <silent> <space>j :<C-u> CocPrev<CR>
 nnoremap <silent> <C-a> :CocCommand clangd.switchSourceHeader<CR>
 
 " vim-lsp-cxx-highlight plugin configuration
-hi default LspCxxHlGroupMemberVariable ctermfg=Brown guifg=Brown
-hi link LspCxxHlGroupNamespace cppExceptions
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
+" hi default LspCxxHlGroupMemberVariable ctermfg=Brown guifg=Brown
+" hi link LspCxxHlGroupNamespace cppExceptions
+" let g:cpp_class_scope_highlight = 1
+" let g:cpp_member_variable_highlight = 1
+" let g:cpp_class_decl_highlight = 1
 
 " lexima plugin configuration
 call lexima#add_rule({'char': '}', 'at': '\%#\n\s*}', 'leave': '}'})
@@ -316,3 +317,25 @@ let g:nvimgdb_config_override = {
   \ 'sign_breakpoint_priority': 10,
   \ 'codewin_command': 'new'
   \ }
+
+" firenvim configration
+
+let g:firenvim_config = {
+    \ 'globalSettings': {
+        \ 'alt': 'all',
+    \  },
+    \ 'localSettings': {
+        \ '.*': {
+            \ 'cmdline': 'neovim',
+            \ 'content': 'text',
+            \ 'priority': 0,
+            \ 'selector': 'textarea',
+            \ 'takeover': 'never',
+        \ },
+    \ }
+\ }
+
+" color configuration
+set termguicolors
+set background=dark " dark | light "
+colorscheme NeoSolarized
