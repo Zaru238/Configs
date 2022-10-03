@@ -1,6 +1,6 @@
 Prepare usb stick
   Format it to 32fat
-  Record the image via dd commane
+  Record the image via dd command
 
 Bios installation mode
   Disable secure boot
@@ -32,7 +32,3 @@ First boot
     git clone https://github.com/Zaru238/Configs.git
   Run first script
     ~/projects/Configs/setup/1.sh
-
-
-
-              vim improvoments - make left column wider

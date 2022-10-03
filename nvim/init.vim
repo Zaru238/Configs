@@ -170,10 +170,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'rhysd/vim-clang-format'
   Plug 'airblade/vim-gitgutter'
   Plug 'kshenoy/vim-signature'
-  Plug 'cohama/lexima.vim'
+  " Plug 'cohama/lexima.vim'
+  Plug 'windwp/nvim-autopairs'
   Plug 'matze/vim-move'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " Plug 'jackguo380/vim-lsp-cxx-highlight'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
   Plug 'goerz/jupytext.vim'
@@ -182,6 +182,31 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'overcache/NeoSolarized'
 
 call plug#end()
+
+" fugitive plugin configuraion
+
+" Togle gitdiff findows
+function! ToggleDiffWindows()
+  let fugitive_windows = []
+  let win_id = winnr('$')
+  while win_id > 0
+    let buf_name = bufname(winbufnr(win_id))
+    if match(buf_name, "fugitive:///") != -1
+      call add(fugitive_windows, win_id)
+    endif
+    let win_id -=1
+  endwhile
+
+  if len(fugitive_windows) == 0
+    Gdiffsplit!
+  else
+    for id in fugitive_windows
+      execute id."close"
+    endfor
+  endif
+ endfunction
+
+nnoremap <silent> <space>; :<C-u>call ToggleDiffWindows()<CR>
 
 " lightline plugin configuration
 let g:lightline =
@@ -229,6 +254,7 @@ let g:nnn#action = {
 
 
 " vim-clang-format plug configuration
+let g:clang_format#command = "clang-format-12"
 let g:clang_format#code_style = "google"
 
 nnoremap <space>w :ClangFormat<CR>
@@ -243,6 +269,7 @@ nnoremap m? :SignatureListGlobalMarks<CR>
 
 "vim-move plug configuration
 let g:move_key_modifier = 'C'
+let g:move_key_modifier_visualmode = 'C'
 
 " coc plug configuration
 
@@ -286,6 +313,11 @@ nnoremap <silent> <space>j :<C-u> CocPrev<CR>
 " Switch between header and source files (C/C++ only)
 nnoremap <silent> <C-a> :CocCommand clangd.switchSourceHeader<CR>
 
+" Iterate over completion variants
+inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
+inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-p>"
+
+
 " vim-lsp-cxx-highlight plugin configuration
 " hi default LspCxxHlGroupMemberVariable ctermfg=Brown guifg=Brown
 " hi link LspCxxHlGroupNamespace cppExceptions
@@ -293,12 +325,12 @@ nnoremap <silent> <C-a> :CocCommand clangd.switchSourceHeader<CR>
 " let g:cpp_member_variable_highlight = 1
 " let g:cpp_class_decl_highlight = 1
 
-" lexima plugin configuration
-call lexima#add_rule({'char': '}', 'at': '\%#\n\s*}', 'leave': '}'})
-call lexima#add_rule({'char': ']', 'at': '\%#\n\s*]', 'leave': ']'})
-call lexima#add_rule({'char': ')', 'at': '\%#\n\s*)', 'leave': ')'})
-" lexima passes over closing parentheses that were entered during this insert
-" session
+" " lexima plugin configuration
+" call lexima#add_rule({'char': '}', 'at': '\%#\n\s*}', 'leave': '}'})
+" call lexima#add_rule({'char': ']', 'at': '\%#\n\s*]', 'leave': ']'})
+" call lexima#add_rule({'char': ')', 'at': '\%#\n\s*)', 'leave': ')'})
+" " lexima passes over closing parentheses that were entered during this insert
+" " session
 
 " nvim-gdb plugin configuration
 let g:nvimgdb_config_override = {
@@ -337,5 +369,10 @@ let g:firenvim_config = {
 
 " color configuration
 set termguicolors
-set background=dark " dark | light "
+set background=light " dark | light "
 colorscheme NeoSolarized
+
+" " nvim-autopairs configuration
+lua << EOF
+require("nvim-autopairs").setup {}
+EOF

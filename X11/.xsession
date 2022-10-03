@@ -1,5 +1,5 @@
 # xrandr --output eDP-1 --same-as VGA-1 &  # Duplicate monitors Home config
-xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --mode 1920x1080 --rotate normal --same-as eDP-1 & # Work config
+xrandr --output HDMI-1 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output eDP-1 --off & # Work config
 setxkbmap -option caps:escape & # Remap Caps Lock into escape
 xmodmap -e 'clear mod5' &  # Remap AltGr to Alt
 xmodmap -e 'keycode 108 = Alt_L' &

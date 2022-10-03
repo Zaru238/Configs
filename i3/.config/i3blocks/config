@@ -35,7 +35,9 @@ interval=once
 signal=10
 
 [volume]
-LABEL=♪ 
+label=Volume:
+command=amixer get Master | grep -E -o '[0-9][0-9]?%' | head -1
+# LABEL=♪ 
 # LABEL=VOL 
 interval=once
 signal=10
@@ -43,12 +45,14 @@ signal=10
 #MIXER=[determined automatically]
 #SCONTROL=[determined automatically]
 #NATURAL_MAPPING=0
+command=$HOME/third-parties/i3blocks-1.4/scripts/volume
 
 [battery]
 interval=30
-LABEL=BAT
-LABEL=⚡
+label=Battery
+# LABEL=⚡
 #BAT_NUMBER=0
+command=$HOME/third-parties/i3blocks-1.4/scripts/battery
 
 # Date Time
 [time]
