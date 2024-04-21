@@ -13,8 +13,8 @@ cd yay
 makepkg -si
 
 #install alacritty
-yay -S compton ttf-hack alacritty
-cp  $CONFIGS_DIR/alacritty/.alacritty.yml ~/
+yay -S compton ttf-hack-nerd alacritty
+cp  $CONFIGS_DIR/alacritty/.alacritty.toml ~/
 
 #install video staff & i3
 yay -S mesa xorg noto-fonts i3

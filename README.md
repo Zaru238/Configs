@@ -1,7 +1,7 @@
 Arch linux config files
 
 alacritty
-  requires ttf-hack  
+  requires ttf-hack-nerd  
   requires zsh  
   requires picom  
 
