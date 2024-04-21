@@ -53,7 +53,7 @@ cp $CONFIGS_DIR/zsh/.zshenv ~/
 #TODO set zsh as default shell
 
 #install nnn
-yay -S nnn
+yay -S nnn-icons
 
 #install file picker
 yay -S mimeo xdg-utils-mimeo
