@@ -38,6 +38,8 @@ set $kc_t 74
 set $kc_v 55
 set $kc_w 25
 set $kc_x 53
+set $kc_o 32
+
 
 set $kc_bracketleft 34
 set $kc_bracketright 35
@@ -45,6 +47,7 @@ set $kc_escape 9
 set $kc_return 36
 set $kc_space 65
 set $kc_semicolon 47
+set $kc_backslash 51
 
 # Homerow navigate keys
 # h
@@ -90,12 +93,12 @@ bindcode $mod+$kc_d exec rofi -show run
 # installed
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# start clipboard daemon
-exec_always --no-startup-id greenclip daemon
+# exec_always --no-startup-id greenclip-mhcerri.greenclip daemon
 
 # startup script
 exec_always --no-startup-id ~/.xsession
 
+# start clipboard daemon
 exec_always --no-startup-id greenclip daemon
 
 # run clipboard manager
@@ -246,9 +249,9 @@ bar {
 }
 
 # Switch keyboard layout
-bindcode $mod+$kc_p exec setxkbmap us; exec pkill -RTMIN+10 i3blocks
-bindcode $mod+$kc_bracketleft exec setxkbmap ua -variant winkeys; exec pkill -RTMIN+10 i3blocks
-bindcode $mod+$kc_bracketright exec setxkbmap ru; exec pkill -RTMIN+10 i3blocks
+bindcode $mod+$kc_o exec setxkbmap us; exec pkill -RTMIN+10 i3blocks
+bindcode $mod+$kc_p exec setxkbmap ua -variant winkeys; exec pkill -RTMIN+10 i3blocks
+bindcode $mod+$kc_backslash exec setxkbmap ru; exec pkill -RTMIN+10 i3blocks
 
 # exec_always --no-startup-id xset s 600
 exec_always --no-startup-id xset dpms 600

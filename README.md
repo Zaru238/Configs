@@ -33,14 +33,6 @@ i3
 nvim
   requires nnn  
   reguires ripgrep  
-  requires python-pynvim  
-  requires python-pytest  
-  requires clang-format  
-  run init.sh for nvim setup  
-  requires nodejs, yarn, jedi, clang and bash-language-server (for coc.vim)  
-  run :CocInstall coc-python after coc.vim initialization  
-  run :CocInstall coc-highlight after coc.vim initialization  
-  run :CocInstall coc-clangd  
 
 weechat
 

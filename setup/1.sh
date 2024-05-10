@@ -71,7 +71,7 @@ yay -S pulseaudio
 # TODO unmute channels
 
 #install & setup nvim
-yay -S neovim ripgrep python-pynvim python-pytest clang python-jedi bash-language-server nodejs yarn neovim-coc-clangd-git
+yay -S neovim ripgrep
 $CONFIGS_DIR/nvim/init.sh
 
 # install extra staff
