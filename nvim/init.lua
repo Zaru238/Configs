@@ -67,6 +67,9 @@ vim.api.nvim_create_autocmd({"FileType"}, {
   callback = function() vim.opt_local.colorcolumn = "" end,
 })
 
+-- replace make with control.py
+vim.opt.makeprg = "python3 -u control.py"
+
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
 
@@ -378,6 +381,13 @@ require("lazy").setup({
   {
     'HiPhish/rainbow-delimiters.nvim',
     dependencies = {'nvim-treesitter/nvim-treesitter'}
+  },
+  {
+    'echasnovski/mini.surround',
+    version = '*',
+    config = function()
+      require('mini.surround').setup()
+    end
   },
 })
 
