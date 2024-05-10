@@ -6,6 +6,9 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 4
 
+-- ignore case during search
+vim.opt.ignorecase = true
+
 -- Tab autoindent stuff
 vim.opt.expandtab = true
 vim.opt.softtabstop = 4
@@ -309,7 +312,8 @@ require("lazy").setup({
       {'hrsh7th/cmp-nvim-lsp'},
       {'hrsh7th/nvim-cmp'},
       {'L3MON4D3/LuaSnip'},
-      {"nvim-treesitter/nvim-treesitter"}
+      {"nvim-treesitter/nvim-treesitter"},
+      {"hrsh7th/cmp-buffer"}
     },
     config = function()
       require("nvim-treesitter.configs").setup({
@@ -345,6 +349,10 @@ require("lazy").setup({
       local cmp = require('cmp')
 
       cmp.setup({
+        sources = {
+          {name = 'nvim_lsp'},
+          {name = 'buffer'},
+        },
         mapping = cmp.mapping.preset.insert({
           ['<C-k>'] = cmp.mapping(function()
             if cmp.visible() then
