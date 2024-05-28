@@ -236,17 +236,20 @@ require("lazy").setup({
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
-      {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'}
+      {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
+      'andrew-george/telescope-themes',
     },
     config = function()
       local builtin = require('telescope.builtin')
 
       vim.keymap.set('n', '<C-p>', builtin.find_files, {})
       vim.keymap.set('n', '<C-g>', builtin.live_grep, {})
+      vim.keymap.set('n', '<C-q>', builtin.buffers, {})
 
       local actions = require("telescope.actions")
       require("telescope").setup{
         defaults = {
+          layout_strategy = "vertical",
           mappings = {
             i = {
               ["<esc>"] = actions.close,
@@ -264,10 +267,20 @@ require("lazy").setup({
             "--smart-case",
             "--fixed-strings" -- don't need to escape special characters
           }
+        },
+        pickers = {
+          buffers = {
+            mappings = {
+              i = {
+                ["<c-d>"] = "delete_buffer",
+              }
+            }
+          }
         }
       }
 
       require('telescope').load_extension('fzf')
+      require('telescope').load_extension('themes')
     end
   },
   {
@@ -293,6 +306,7 @@ require("lazy").setup({
           "c",
           "cmake",
           "cpp",
+          "json",
           "make",
           "lua",
           "python"
@@ -313,7 +327,8 @@ require("lazy").setup({
       {'hrsh7th/nvim-cmp'},
       {'L3MON4D3/LuaSnip'},
       {"nvim-treesitter/nvim-treesitter"},
-      {"hrsh7th/cmp-buffer"}
+      {"hrsh7th/cmp-buffer"},
+      {"aznhe21/actions-preview.nvim"}
     },
     config = function()
       require("nvim-treesitter.configs").setup({
@@ -331,17 +346,19 @@ require("lazy").setup({
 
         vim.keymap.set("n", "<space>d", function() vim.lsp.buf.definition() end, opts)
         vim.keymap.set("n", "<space>i", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set("n", "<space>f", function() vim.lsp.buf.code_action({apply = true}) end, opts)
+        -- vim.keymap.set("n", "<space>f", function() vim.lsp.buf.code_action({apply = true}) end, opts)
         vim.keymap.set("n", "<space>n", function() vim.lsp.buf.rename() end, opts)
         vim.keymap.set('n', '<space>s', builtin.lsp_dynamic_workspace_symbols, {buffer = bufnr})
         vim.keymap.set('n', '<space>r', builtin.lsp_references, {buffer = bufnr})
         vim.keymap.set('n', '<C-a>', '<cmd>ClangdSwitchSourceHeader<CR>', {buffer = bufnr})
 
+        vim.keymap.set('n', "<space>f", require("actions-preview").code_actions)
+
         vim.keymap.set({'n', 'x'}, '<space>w', function()
           vim.lsp.buf.format({
             async = false,
             timeout_ms = 10000,
-            filter = allow_format({'clangd'})
+            filter = allow_format({'clangd','pylsp'})
           })
         end, opts)
       end)
@@ -384,6 +401,14 @@ require("lazy").setup({
           end,
         },
       })
+
+      require("actions-preview").setup {
+        diff = {
+          algorithm = "patience",
+          ignore_whitespace = true,
+        },
+        telescope = require("telescope.themes").get_dropdown { winblend = 10 },
+      }
     end
   },
   {
