@@ -52,7 +52,7 @@ action = "ToggleViMode"
 key = "Escape"
 mode = "Vi|~Search"
 
-[shell]
+[terminal.shell]
 args = ["--login"]
 program = "/bin/zsh"
 

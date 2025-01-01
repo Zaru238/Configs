@@ -11,9 +11,9 @@ vim.opt.ignorecase = true
 
 -- Tab autoindent stuff
 vim.opt.expandtab = true
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
 
 -- Always show tabs
 vim.opt.showtabline = 2
@@ -112,6 +112,24 @@ vim.keymap.set('n', '<space>7','7gt', {silent = true})
 vim.keymap.set('n', '<space>8','8gt', {silent = true})
 vim.keymap.set('n', '<space>9','9gt', {silent = true})
 
+-- Window manipulation
+vim.keymap.set("n", "<D-y>", '<C-w>ww', { noremap = true, silent = true })
+vim.keymap.set("n", "<D-u>", '<C-w>s', { noremap = true, silent = true })
+vim.keymap.set("n", "<D-i>", '<C-w>v', { noremap = true, silent = true })
+
+vim.keymap.set("n", "<D-j>", '<C-w>j', { noremap = true, silent = true })
+vim.keymap.set("n", "<D-k>", '<C-w>h', { noremap = true, silent = true })
+vim.keymap.set("n", "<D-h>", '<C-w>h', { noremap = true, silent = true })
+vim.keymap.set("n", "<D-l>", '<C-w>l', { noremap = true, silent = true })
+
+vim.keymap.set("n", "<D-m>", 'ZZ', { noremap = true, silent = true })
+vim.keymap.set("n", "<D-,>", '<C-w>=', { noremap = true, silent = true })
+
+
+-- Don't read and write shada file
+-- shada file keeps shares some information between sessions. such as marks
+vim.opt.shadafile = "NONE"
+
 -- TODO
 -- Preview substitutions live, as you type!
 -- vim.opt.inccommand = 'split'
@@ -153,7 +171,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   'tpope/vim-sleuth',
   'airblade/vim-gitgutter',
-  'kshenoy/vim-signature',
   'tpope/vim-fugitive',
   {'numToStr/Comment.nvim', opts = {}},
   {
@@ -244,7 +261,6 @@ require("lazy").setup({
 
       vim.keymap.set('n', '<C-p>', builtin.find_files, {})
       vim.keymap.set('n', '<C-g>', builtin.live_grep, {})
-      vim.keymap.set('n', '<C-q>', builtin.buffers, {})
 
       local actions = require("telescope.actions")
       require("telescope").setup{
@@ -268,15 +284,6 @@ require("lazy").setup({
             "--fixed-strings" -- don't need to escape special characters
           }
         },
-        pickers = {
-          buffers = {
-            mappings = {
-              i = {
-                ["<c-d>"] = "delete_buffer",
-              }
-            }
-          }
-        }
       }
 
       require('telescope').load_extension('fzf')
@@ -399,6 +406,28 @@ require("lazy").setup({
           function(server_name)
             require('lspconfig')[server_name].setup({})
           end,
+          clangd = function()
+            require('lspconfig').clangd.setup({
+              cmd = {
+                "clangd",
+                "--query-driver=/home/ANT.AMAZON.COM/kostianz/workspace/cocoa/prebuilts/toolchain/gcc/x86_64/gcc-arm-none-eabi-10-2020-q4-major/bin/arm-none-eabi-g*,/home/ANT.AMAZON.COM/kostianz/workspace/cocoa/prebuilts/toolchain/gcc/x86_64/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-g*",
+                "--enable-config",
+                "--background-index",
+                "--clang-tidy",
+                "--completion-style=detailed",
+                "--header-insertion-decorators",
+                "--header-insertion=iwyu",
+                "--pch-storage=memory",
+              },
+              init_options = {
+                usePlaceholders = true,
+                completeUnimported = true,
+                clangdFileStatus = true,
+              },
+              autostart = true,
+              single_file_support = true,
+            })
+          end,
         },
       })
 
@@ -413,6 +442,7 @@ require("lazy").setup({
   },
   {
     'HiPhish/rainbow-delimiters.nvim',
+    version = "0.6.2",
     dependencies = {'nvim-treesitter/nvim-treesitter'}
   },
   {
@@ -422,5 +452,36 @@ require("lazy").setup({
       require('mini.surround').setup()
     end
   },
-})
+  {
+    "fnune/recall.nvim",
+    version = "*",
+    config = function()
+      local recall = require("recall")
 
+      require("recall").setup({
+        telescope = {
+          mappings = {
+            unmark_selected_entry = {
+              insert = "<C-d>",
+            },
+          },
+        },
+      })
+
+      vim.keymap.set("n", "<C-q>", "<cmd>Telescope recall<CR>", { noremap = true, silent = true })
+      vim.keymap.set("n", "mm", recall.toggle, { noremap = true, silent = true })
+    end
+  },
+  {
+    'sakhnik/nvim-gdb',
+     init = function()
+       vim.g.nvimgdb_disable_start_keymaps = true
+       vim.g.nvimgdb_config_override = {
+         key_breakpoint = "<D-b>",
+         sign_current_line = "▶",
+         termwin_command = "belowright vnew",
+         codewin_command = "vnew",
+       }
+     end
+  },
+})
