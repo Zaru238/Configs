@@ -13,6 +13,7 @@ cd yay
 makepkg -si
 
 #install alacritty
+# may be should put it to $home/
 yay -S compton ttf-hack-nerd alacritty
 cp  $CONFIGS_DIR/alacritty/.alacritty.toml ~/
 

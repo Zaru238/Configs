@@ -12,4 +12,4 @@ export NNN_COLORS='1234'
 export LC_COLLATE="C"
 
 # used for qutebrowser hook
-export PATH=~/bin:${PATH}
+export PATH=~/bin:~/bin/platform-tools:~/.toolbox/bin:${PATH}

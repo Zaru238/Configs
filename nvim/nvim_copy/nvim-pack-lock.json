@@ -1,0 +1,32 @@
+{
+  "plugins": {
+    "Comment.nvim": {
+      "rev": "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
+      "src": "https://github.com/numToStr/Comment.nvim"
+    },
+    "mini.move": {
+      "rev": "a776027e68fe763987a0132d59877d651a7c0130",
+      "src": "https://github.com/echasnovski/mini.move"
+    },
+    "nnn.nvim": {
+      "rev": "efe690293eee87558f034a83ed96157e52639cdb",
+      "src": "https://github.com/luukvbaal/nnn.nvim"
+    },
+    "solarized.nvim": {
+      "rev": "fe02ed49cc017cc93657bd6306a2624394611c69",
+      "src": "https://github.com/shaunsingh/solarized.nvim"
+    },
+    "vim-fugitive": {
+      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
+      "src": "https://github.com/tpope/vim-fugitive"
+    },
+    "vim-gitgutter": {
+      "rev": "21c977e8597c468c7dc76001389b0b430d46a4b0",
+      "src": "https://github.com/airblade/vim-gitgutter"
+    },
+    "vim-sleuth": {
+      "rev": "be69bff86754b1aa5adcbb527d7fcd1635a84080",
+      "src": "https://github.com/tpope/vim-sleuth"
+    }
+  }
+}

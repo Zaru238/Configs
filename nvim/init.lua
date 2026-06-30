@@ -71,7 +71,7 @@ vim.api.nvim_create_autocmd({"FileType"}, {
 })
 
 -- replace make with control.py
-vim.opt.makeprg = "python3 -u control.py"
+-- vim.opt.makeprg = "python3 -u control.py"
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
@@ -325,14 +325,14 @@ require("lazy").setup({
   {'RRethy/vim-illuminate'},
   {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
+    branch = 'v4.x',
     dependencies = {
-      {'williamboman/mason.nvim'},
-      {'williamboman/mason-lspconfig.nvim'},
+      {'williamboman/mason.nvim', tag = 'v1.11.0'},
+      {'williamboman/mason-lspconfig.nvim', tag = 'v1.32.0'},
       {'neovim/nvim-lspconfig'},
       {'hrsh7th/cmp-nvim-lsp'},
       {'hrsh7th/nvim-cmp'},
-      {'L3MON4D3/LuaSnip'},
+      -- {'L3MON4D3/LuaSnip'},
       {"nvim-treesitter/nvim-treesitter"},
       {"hrsh7th/cmp-buffer"},
       {"aznhe21/actions-preview.nvim"}
@@ -342,6 +342,16 @@ require("lazy").setup({
         ensure_installed = {"markdown"}
       })
       local lsp_zero = require('lsp-zero')
+
+      lsp_zero.ui({
+        float_border = 'rounded',
+        sign_text = {
+          error = '✘',
+          warn = '▲',
+          hint = '⚑',
+          info = '»',
+        },
+      })
 
       local function allow_format(servers)
         return function(client) return vim.tbl_contains(servers, client.name) end
@@ -353,6 +363,7 @@ require("lazy").setup({
 
         vim.keymap.set("n", "<space>d", function() vim.lsp.buf.definition() end, opts)
         vim.keymap.set("n", "<space>i", function() vim.lsp.buf.hover() end, opts)
+        vim.keymap.set("n", "<space>e", function() vim.diagnostic.open_float() end, opts)
         -- vim.keymap.set("n", "<space>f", function() vim.lsp.buf.code_action({apply = true}) end, opts)
         vim.keymap.set("n", "<space>n", function() vim.lsp.buf.rename() end, opts)
         vim.keymap.set('n', '<space>s', builtin.lsp_dynamic_workspace_symbols, {buffer = bufnr})
@@ -407,7 +418,7 @@ require("lazy").setup({
             require('lspconfig')[server_name].setup({})
           end,
           clangd = function()
-            require('lspconfig').clangd.setup({
+            require('lspconfig')['clangd'].setup({
               cmd = {
                 "clangd",
                 "--query-driver=/home/ANT.AMAZON.COM/kostianz/workspace/cocoa/prebuilts/toolchain/gcc/x86_64/gcc-arm-none-eabi-10-2020-q4-major/bin/arm-none-eabi-g*,/home/ANT.AMAZON.COM/kostianz/workspace/cocoa/prebuilts/toolchain/gcc/x86_64/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-g*",
